@@ -24,9 +24,9 @@ func (s *ClientService) GetClients() ([]map[string]string, error) {
 	coursesSlice := []map[string]string{}
 	for _, item := range courses {
 		coursesMap := map[string]string{
-			"id":            strconv.Itoa(item.Id),
-			"restaurant_id": strconv.Itoa(item.ManagerId),
-			"name":          item.Name,
+			"id":         strconv.Itoa(item.Id),
+			"manager_id": strconv.Itoa(item.ManagerId),
+			"name":       item.Name,
 		}
 		coursesSlice = append(coursesSlice, coursesMap)
 	}

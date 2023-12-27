@@ -4,6 +4,7 @@ import (
 	"github.com/IlyaZayats/managus/internal/requests"
 	"github.com/IlyaZayats/managus/internal/services"
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	"net/http"
 )
 
@@ -35,6 +36,7 @@ func (h *ClientHandlers) GetClients(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "get clients error", "text": err.Error()})
 		return
 	}
+	logrus.Debug(clients)
 	c.JSON(http.StatusOK, gin.H{"status": "ok", "item": clients})
 }
 
