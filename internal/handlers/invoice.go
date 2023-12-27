@@ -4,6 +4,7 @@ import (
 	"github.com/IlyaZayats/managus/internal/requests"
 	"github.com/IlyaZayats/managus/internal/services"
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	"net/http"
 )
 
@@ -30,10 +31,13 @@ func (h *InvoiceHandlers) initRoute() {
 
 func (h *InvoiceHandlers) GetInvoices(c *gin.Context) {
 	invoices, err := h.svc.GetInvoices()
+
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "get invoices error", "text": err.Error()})
 		return
 	}
+
+	logrus.Debug(invoices)
 	c.JSON(http.StatusOK, gin.H{"status": "ok", "item": invoices})
 }
 
@@ -56,6 +60,7 @@ func (h *InvoiceHandlers) DeleteInvoice(c *gin.Context) {
 func (h *InvoiceHandlers) InsertInvoice(c *gin.Context) {
 
 	req, ok := GetRequest[requests.InsertInvoiceRequest](c)
+	logrus.Debug(req)
 	if !ok {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "insert invoice request error", "text": ok})
 		return

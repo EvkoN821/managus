@@ -62,6 +62,7 @@ func (r *PostgresInvoiceRepository) parseRowsToSlice(rows pgx.Rows) ([]entity.In
 		var id, clientId, sumTotal int
 		var invoiceId, handed, accepted, addInfo, basisDoc string
 		var contDate, execDate pgtype.Date
+		//var contDate, execDate string
 		if err := rows.Scan(&id, &clientId, &invoiceId, &contDate, &execDate, &sumTotal, &handed, &accepted, &addInfo, &basisDoc); err != nil {
 			return slice, err
 		}
@@ -73,11 +74,13 @@ func (r *PostgresInvoiceRepository) parseRowsToSlice(rows pgx.Rows) ([]entity.In
 			InvoiceId: invoiceId,
 			ContDate:  contDateString,
 			ExecDate:  execDateString,
-			SumTotal:  sumTotal,
-			Handed:    handed,
-			Accepted:  accepted,
-			AddInfo:   addInfo,
-			BasisDoc:  basisDoc,
+			//ContDate: contDate,
+			//ExecDate: execDate,
+			SumTotal: sumTotal,
+			Handed:   handed,
+			Accepted: accepted,
+			AddInfo:  addInfo,
+			BasisDoc: basisDoc,
 		})
 	}
 	return slice, nil

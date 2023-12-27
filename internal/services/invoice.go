@@ -26,7 +26,7 @@ func (s *InvoiceService) GetInvoices() ([]map[string]string, error) {
 		foodsMap := map[string]string{
 			"id":         strconv.Itoa(item.Id),
 			"client_id":  strconv.Itoa(item.ClientId),
-			"invoice_id": item.InvoiceId,
+			"id_invoice": item.InvoiceId,
 			"cont_date":  item.ContDate,
 			"exec_date":  item.ExecDate,
 			"sum_total":  strconv.Itoa(item.SumTotal),
