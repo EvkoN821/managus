@@ -1,0 +1,39 @@
+
+
+services:
+  managus:
+    container_name: managus
+    build:
+      context: .
+      dockerfile: Dockerfile
+    links:
+      - postgres_managus
+    env_file:
+      - managus.env
+    ports:
+      - 8090:8080
+    networks:
+      - managus
+
+  postgres_managus:
+    container_name: postgres_managus
+    build:
+      context: build/postgres
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+    volumes:
+      - "postgres:/var/lib/postgresql/data"
+    ports:
+      - 5555:5432
+    networks:
+      - managus
+
+networks:
+  managus:
+    name: managus
+
+volumes:
+  postgres:
